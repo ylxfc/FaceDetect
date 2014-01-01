@@ -1,4 +1,4 @@
-package org.yanzi.util;
+package com.yuli.util;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

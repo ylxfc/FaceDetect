@@ -1,7 +1,7 @@
-package org.yanzi.testfacedetect;
+package com.yuli.facedetect;
 
-import org.yanzi.util.ImageUtil;
-import org.yanzi.util.MyToast;
+import com.yuli.util.ImageUtil;
+import com.yuli.util.MyToast;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	static final String tag = "yan";
@@ -66,7 +67,8 @@ public class MainActivity extends Activity {
 			case 0:
 				Bitmap b = (Bitmap) msg.obj;
 				imgView.setImageBitmap(b);
-				MyToast.showToast(getApplicationContext(), "¼ì²âÍê±Ï");
+//				MyToast.showToast(getApplicationContext(), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+				Toast.makeText(getApplicationContext(), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", Toast.LENGTH_SHORT).show();
 				break;
 			case 1:
 				showProcessBar();
@@ -131,7 +133,7 @@ public class MainActivity extends Activity {
 		this.srcFace = srcImg.copy(Config.RGB_565, true);
 		int w = srcFace.getWidth();
 		int h = srcFace.getHeight();
-		Log.i(tag, "´ý¼ì²âÍ¼Ïñ: w = " + w + "h = " + h);
+		Log.i(tag, "ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½: w = " + w + "h = " + h);
 		faceDetector = new FaceDetector(w, h, N_MAX);
 		face = new FaceDetector.Face[N_MAX];
 	}
@@ -139,24 +141,24 @@ public class MainActivity extends Activity {
 		int w = rect.width();
 		int h = rect.height();
 		int s = w*h;
-		Log.i(tag, "ÈËÁ³ ¿íw = " + w + "¸ßh = " + h + "ÈËÁ³Ãæ»ý s = " + s);
+		Log.i(tag, "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½w = " + w + "ï¿½ï¿½h = " + h + "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ s = " + s);
 		if(s < 10000){
-			Log.i(tag, "ÎÞÐ§ÈËÁ³£¬ÉáÆú.");
+			Log.i(tag, "ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.");
 			return false;
 		}
 		else{
-			Log.i(tag, "ÓÐÐ§ÈËÁ³£¬±£´æ.");
+			Log.i(tag, "ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.");
 			return true;	
 		}
 	}
 	public Bitmap detectFace(){
 		//		Drawable d = getResources().getDrawable(R.drawable.face_2);
-		//		Log.i(tag, "Drawable³ß´ç w = " + d.getIntrinsicWidth() + "h = " + d.getIntrinsicHeight());
+		//		Log.i(tag, "Drawableï¿½ß´ï¿½ w = " + d.getIntrinsicWidth() + "h = " + d.getIntrinsicHeight());
 		//		BitmapDrawable bd = (BitmapDrawable)d;
 		//		Bitmap srcFace = bd.getBitmap();
 
 		int nFace = faceDetector.findFaces(srcFace, face);
-		Log.i(tag, "¼ì²âµ½ÈËÁ³£ºn = " + nFace);
+		Log.i(tag, "ï¿½ï¿½âµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½n = " + nFace);
 		for(int i=0; i<nFace; i++){
 			Face f  = face[i];
 			PointF midPoint = new PointF();
@@ -166,7 +168,7 @@ public class MainActivity extends Activity {
 			Point eyeLeft = new Point((int)(midPoint.x - dis/2), (int)midPoint.y);
 			Point eyeRight = new Point((int)(midPoint.x + dis/2), (int)midPoint.y);
 			Rect faceRect = new Rect((int)(midPoint.x - dd), (int)(midPoint.y - dd), (int)(midPoint.x + dd), (int)(midPoint.y + dd));
-			Log.i(tag, "×óÑÛ×ø±ê x = " + eyeLeft.x + "y = " + eyeLeft.y);
+			Log.i(tag, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ x = " + eyeLeft.x + "y = " + eyeLeft.y);
 			if(checkFace(faceRect)){
 				Canvas canvas = new Canvas(srcFace);
 				Paint p = new Paint();
@@ -181,9 +183,9 @@ public class MainActivity extends Activity {
 
 		}
 		ImageUtil.saveJpeg(srcFace);
-		Log.i(tag, "±£´æÍê±Ï");
+		Log.i(tag, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 
-		//½«»æÖÆÍê³ÉºóµÄfaceBitmap·µ»Ø
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éºï¿½ï¿½faceBitmapï¿½ï¿½ï¿½ï¿½
 		return srcFace;
 
 	}
